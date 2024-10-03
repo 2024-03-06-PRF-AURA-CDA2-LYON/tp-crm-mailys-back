@@ -40,5 +40,18 @@ public class OrderController {
         Order savedOrder = orderRepo.save(order);
         return ResponseEntity.created(URI.create("/orders/"+savedOrder.getId())).body(savedOrder);
     }
+    @DeleteMapping("delete/{id}")
+    public void deleteOrder(@PathVariable("id") Integer id){
+        orderRepo.deleteById(id);
+    }
 
+    @PutMapping("update/{id}")
+    public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @RequestBody Order order){
+        if(!orderRepo.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }
+        order.setId(id);
+        Order updateOrder = orderRepo.save(order);
+        return ResponseEntity.ok(updateOrder);
+    }
 }
