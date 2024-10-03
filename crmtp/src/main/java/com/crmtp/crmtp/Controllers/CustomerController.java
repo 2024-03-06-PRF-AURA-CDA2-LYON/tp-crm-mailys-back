@@ -16,7 +16,7 @@ import java.util.Optional;
     @Autowired
     private CustomerRepository customerRepo;
 
-    @GetMapping("/")
+    @GetMapping("/show")
     public List<Customer> getCustomers(){
         return customerRepo.findAll();
     }
@@ -30,4 +30,10 @@ import java.util.Optional;
         Customer savedCustomer = customerRepo.save(customer);
         return ResponseEntity.created(URI.create("/customer/"+ savedCustomer.getId())).body(savedCustomer);
     }
+
+    @DeleteMapping("delete/{id}")
+    public void deleteRole(@PathVariable("id") Integer id){
+        customerRepo.deleteById(id);
+    }
+
 }
