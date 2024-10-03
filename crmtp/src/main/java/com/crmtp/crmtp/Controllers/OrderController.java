@@ -29,6 +29,16 @@ public class OrderController {
         return orderRepo.findAll();
     }
 
+    @GetMapping("order/{id}")
+    public ResponseEntity<Order> getOrder(@PathVariable Integer id){
+        Optional<Order> order = orderRepo.findById(id);
+        return order.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
 
+    @PostMapping("order/save")
+    public ResponseEntity<Order> saveOrder(@RequestBody Order order){
+        Order savedOrder = orderRepo.save(order);
+        return ResponseEntity.created(URI.create("/orders/"+savedOrder.getId())).body(savedOrder);
+    }
 
 }
