@@ -8,7 +8,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(name="/customers", produces="application/json")
+@RequestMapping(path="/customers", produces="application/json")
 @CrossOrigin(origins ="*")
 public class CustomerController {
     @Autowired
