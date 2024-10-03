@@ -36,4 +36,14 @@ import java.util.Optional;
         customerRepo.deleteById(id);
     }
 
+    @PutMapping("update/{id}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Integer id, @RequestBody Customer customer){
+        if(!customerRepo.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }
+        customer.setId(id);
+        Customer updateCustomer = customerRepo.save(customer);
+        return ResponseEntity.ok(updateCustomer);
+    }
+
 }
