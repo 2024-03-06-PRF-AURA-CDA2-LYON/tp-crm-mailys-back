@@ -2,6 +2,8 @@ package com.crmtp.crmtp.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.Optional;
+import java.util.Set;
 
 @Entity
 @Data
@@ -42,4 +44,6 @@ public class Customer {
     @Column(name="state")
     private Integer state;
 
+    @OneToMany
+    private Set<Order> orders;
 }
